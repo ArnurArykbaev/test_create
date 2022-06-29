@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <v-app>
+    <v-main class="main">
+      <Header />
+      <FirstScreen class="first-screen" />
+      <InfoSection />
+      <Footer class="footer" />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Header from "@/components/Header.vue";
+import FirstScreen from "@/components/FirstScreen.vue";
+import InfoSection from "@/components/InfoSection.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Header,
+    FirstScreen,
+    InfoSection,
+    Footer
   },
+  data: () => ({
+    toScroll: false
+  })
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  height: 100%;
+}
+.main {
+  background-color: #ffd203;
+}
+.v-main__wrap {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.first-screen {
+  flex: 1 1 auto;
+}
+.footer {
+  flex: 0;
 }
 </style>
