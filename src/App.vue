@@ -2,8 +2,7 @@
   <v-app>
     <v-main class="main">
       <Header />
-      <FirstScreen class="first-screen" />
-      <InfoSection />
+      <router-view class="first-screen"></router-view>
       <Footer class="footer" />
     </v-main>
   </v-app>
@@ -11,16 +10,12 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import FirstScreen from "@/components/FirstScreen.vue";
-import InfoSection from "@/components/InfoSection.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
   name: "App",
   components: {
     Header,
-    FirstScreen,
-    InfoSection,
     Footer
   },
   data: () => ({

@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import router from "./router";
 import VWave from "v-wave";
 import App from "./App.vue";
 import store from "./store";
@@ -8,4 +9,4 @@ import "animate.css";
 
 loadFonts();
 
-createApp(App).use(store).use(vuetify).use(VWave).mount("#app");
+createApp(App).use(store).use(vuetify).use(VWave).use(router).mount("#app");
