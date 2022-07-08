@@ -22,8 +22,8 @@
         </div>
       </v-row>
       <v-row class="ma-2 justify-center">
-        <div class="sigin-block">
-          <v-form class="sigin-form mt-5" ref="form" v-model="valid">
+        <div class="login-block">
+          <v-form class="login-form mt-5" ref="form" v-model="valid">
             <v-text-field
               class="animate__animated animate__fadeInLeft"
               v-model="email"
@@ -43,7 +43,7 @@
               <v-btn
                 :disabled="!valid"
                 color="#ffd203"
-                class="sigin-button mr-4 animate__animated animate__fadeInUp"
+                class="login-button mr-4 animate__animated animate__fadeInUp"
                 @click="validate"
                 depressed
               >
@@ -84,7 +84,7 @@ export default {
 .login-mark,
 .login-header,
 .login-divider,
-.sigin-block {
+.login-block {
   position: relative;
   color: #fff;
   opacity: 0.8;
@@ -96,7 +96,7 @@ export default {
 .info-description {
   max-width: 500px;
 }
-.sigin-block {
+.login-block {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -104,12 +104,12 @@ export default {
   min-height: 300px;
   background-color: #000;
 }
-.sigin-form {
+.login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.sigin-button {
+.login-button {
   color: #000 !important;
   max-width: 120px;
 }

@@ -1,9 +1,7 @@
 <template>
   <v-footer class="bg-black pt-10">
     <v-row justify="center" no-gutters>
-      <v-btn color="white" variant="text" class="mx-2" rounded="xl">
-        {{ link }}
-      </v-btn>
+      <v-btn color="white" variant="text" class="mx-2" rounded="xl"> </v-btn>
       <v-col class="text-center text-white mt-4" cols="12">
         {{ new Date().getFullYear() }} —
         <a href="https://github.com/ArnurArykbaev"
