@@ -18,9 +18,9 @@
           </div>
         </router-link>
         <div class="enter-block">
-          <router-link class="router-link" to="/signin">
-            <v-btn elevation="1" rounded text class="sign-in-btn"
-              >Sign in</v-btn
+          <router-link class="router-link" to="/signup">
+            <v-btn elevation="1" rounded text class="sign-up-btn"
+              >Sign up</v-btn
             >
           </router-link>
           <router-link class="router-link" to="/login">
@@ -45,8 +45,8 @@
           </div>
         </router-link>
         <div class="enter-block">
-          <router-link class="router-link" to="/signin">
-            <v-btn rounded text class="sign-in-btn">Sign in</v-btn>
+          <router-link class="router-link" to="/signup">
+            <v-btn rounded text class="sign-up-btn">Sign up</v-btn>
           </router-link>
           <router-link class="router-link" to="/login">
             <v-btn rounded text class="log-in-btn">Log in</v-btn>
@@ -86,14 +86,14 @@ export default {
 .info-img {
   width: 25px;
 }
-.sign-in-btn,
+.sign-up-btn,
 .log-in-btn {
   width: 6rem;
 }
 .log-in-btn {
   border-radius: 0px 20px 20px 0px;
 }
-.sign-in-btn {
+.sign-up-btn {
   border-radius: 20px 0px 0px 20px;
 }
 .router-link {

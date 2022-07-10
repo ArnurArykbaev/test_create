@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .first-screen-container {
-  height: 100vh;
+  height: 113vh;
   width: 100%;
 }
 .button-header {
