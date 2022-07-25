@@ -23,33 +23,45 @@
       </v-row>
       <v-row class="ma-2 justify-center">
         <div class="login-block">
-          <v-form class="login-form mt-5" ref="form" v-model="valid">
+          <v-form
+            class="login-form mt-5"
+            ref="form"
+            @submit.prevent="submitBtn"
+          >
             <v-text-field
               class="animate__animated animate__fadeInLeft"
-              v-model="email"
-              :rules="emailRules"
+              v-model="state.email"
               label="E-mail"
+              hide-details="auto"
               requred
             >
             </v-text-field>
+            <div class="v-messages" v-if="v$.email.$error">
+              {{ v$.email.$errors[0].$message }}
+            </div>
             <v-text-field
               class="animate__animated animate__fadeInRight"
-              v-model="password"
+              v-model="state.password"
               label="Password"
+              type="password"
+              hide-details="auto"
               requred
             >
             </v-text-field>
-            <v-row class="justify-center">
+            <div class="v-messages" v-if="v$.password.$error">
+              {{ v$.password.$errors[0].$message }}
+            </div>
+            <v-div class="d-flex justify-center">
               <v-btn
-                :disabled="!valid"
                 color="#ffd203"
                 class="login-button mr-4 animate__animated animate__fadeInUp"
-                @click="validate"
+                type="submit"
                 depressed
+                :disabled="isDisabledSubmit"
               >
                 Submit
               </v-btn>
-            </v-row>
+            </v-div>
           </v-form>
         </div>
       </v-row>
@@ -58,8 +70,80 @@
 </template>
 
 <script>
+import { reactive, computed } from "vue";
+import useVuelidate from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
+
+const baseURL = "http://localhost:1234";
 export default {
-  name: "loginPage"
+  name: "loginPage",
+  setup() {
+    const state = reactive({
+      email: "",
+      password: ""
+    });
+    const rules = computed(() => {
+      return {
+        email: {
+          required,
+          email
+        },
+        password: {
+          required
+        }
+      };
+    });
+
+    const v$ = useVuelidate(rules, state);
+
+    return { state, v$ };
+  },
+  computed: {
+    isDisabledSubmit() {
+      return this.v$.email.$invalid || this.v$.password.$invalid;
+    }
+  },
+  methods: {
+    async submitBtn() {
+      const postData = {
+        email: this.email,
+        password: this.password
+      };
+      console.log(postData);
+      try {
+        const res = await fetch(`${baseURL}/login`, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": "token-value"
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *client
+          body: JSON.stringify(postData)
+        });
+        if (!res.ok) {
+          console.log(res);
+          const message = `An error has occured: ${res.status} - ${res.statusText}`;
+          throw new Error(message);
+        }
+        const data = await res.json();
+        const result = {
+          status: res.status + "-" + res.statusText,
+          headers: {
+            "Content-Type": res.headers.get("Content-Type"),
+            "Content-Length": res.headers.get("Content-Length")
+          },
+          data: data
+        };
+        console.log(result);
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+  }
 };
 </script>
 
@@ -112,5 +196,11 @@ export default {
 .login-button {
   color: #000 !important;
   max-width: 120px;
+}
+.v-messages {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 16px;
+  color: red;
 }
 </style>

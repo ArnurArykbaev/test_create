@@ -48,7 +48,10 @@
                 don't need to worry about this. Create and publish your work!
               </div>
             </div>
-            <v-img src="../assets/img/ds.png" alt="Mobile Responsive"></v-img>
+            <v-img
+              src="../assets/img/phone.png"
+              alt="Mobile Responsive"
+            ></v-img>
           </div>
         </v-col>
       </v-row>

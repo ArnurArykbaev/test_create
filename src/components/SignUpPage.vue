@@ -210,7 +210,7 @@
 </template>
 
 <script>
-import { reactive, computed } from "vue"; // "from '@vue/composition-api'" if you are using Vue 2.x
+import { reactive, computed } from "vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
