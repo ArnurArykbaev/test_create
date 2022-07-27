@@ -32,13 +32,9 @@
               class="animate__animated animate__fadeInLeft"
               v-model="state.email"
               label="E-mail"
-              hide-details="auto"
               requred
             >
             </v-text-field>
-            <div class="v-messages" v-if="v$.email.$error">
-              {{ v$.email.$errors[0].$message }}
-            </div>
             <v-text-field
               class="animate__animated animate__fadeInRight"
               v-model="state.password"
@@ -72,7 +68,7 @@
 <script>
 import { reactive, computed } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 
 const baseURL = "http://localhost:1234";
 export default {
@@ -85,8 +81,7 @@ export default {
     const rules = computed(() => {
       return {
         email: {
-          required,
-          email
+          required
         },
         password: {
           required
