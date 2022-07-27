@@ -28,26 +28,36 @@
             ref="form"
             @submit.prevent="submitBtn"
           >
-            <v-text-field
-              class="animate__animated animate__fadeInLeft"
-              v-model="state.email"
-              label="E-mail"
-              requred
-            >
-            </v-text-field>
-            <v-text-field
-              class="animate__animated animate__fadeInRight"
-              v-model="state.password"
-              label="Password"
-              type="password"
-              hide-details="auto"
-              requred
-            >
-            </v-text-field>
-            <div class="v-messages" v-if="v$.password.$error">
-              {{ v$.password.$errors[0].$message }}
+            <div class="input-field">
+              <v-text-field
+                class="animate__animated animate__fadeInLeft"
+                v-model="state.email"
+                label="E-mail"
+                hide-details="auto"
+                @blur="v$.email.$touch"
+                requred
+              >
+              </v-text-field>
+              <div class="v-messages" v-if="v$.email.$error">
+                {{ v$.email.$errors[0].$message }}
+              </div>
             </div>
-            <v-div class="d-flex justify-center">
+            <div class="input-field">
+              <v-text-field
+                class="animate__animated animate__fadeInRight"
+                v-model="state.password"
+                label="Password"
+                type="password"
+                hide-details="auto"
+                @blur="v$.password.$touch"
+                requred
+              >
+              </v-text-field>
+              <div class="v-messages" v-if="v$.password.$error">
+                {{ v$.password.$errors[0].$message }}
+              </div>
+            </div>
+            <div class="d-flex justify-center">
               <v-btn
                 color="#ffd203"
                 class="login-button mr-4 animate__animated animate__fadeInUp"
@@ -57,7 +67,7 @@
               >
                 Submit
               </v-btn>
-            </v-div>
+            </div>
           </v-form>
         </div>
       </v-row>
@@ -68,7 +78,7 @@
 <script>
 import { reactive, computed } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import { required, email } from "@vuelidate/validators";
 
 const baseURL = "http://localhost:1234";
 export default {
@@ -81,7 +91,8 @@ export default {
     const rules = computed(() => {
       return {
         email: {
-          required
+          required,
+          email
         },
         password: {
           required
@@ -100,6 +111,7 @@ export default {
   },
   methods: {
     async submitBtn() {
+      this.v$.$validate();
       const postData = {
         email: this.email,
         password: this.password
@@ -143,6 +155,9 @@ export default {
 </script>
 
 <style>
+.input-field {
+  margin-bottom: 2rem;
+}
 .log-in-container {
   background: url("/src/assets/img/signin/sigin-notebook.jpg") no-repeat center
     center;
