@@ -113,8 +113,8 @@ export default {
     async submitBtn() {
       this.v$.$validate();
       const postData = {
-        email: this.email,
-        password: this.password
+        email: this.state.email,
+        password: this.state.password
       };
       console.log(postData);
       try {
@@ -172,7 +172,7 @@ export default {
   right: 0;
   bottom: 0;
   background: rgb(0, 0, 0);
-  opacity: 0.5;
+  opacity: 0.7;
   z-index: 1;
 }
 .login-mark,
@@ -181,7 +181,7 @@ export default {
 .login-block {
   position: relative;
   color: #fff;
-  opacity: 0.8;
+  opacity: 0.95;
   z-index: 2;
 }
 .login-divider {
