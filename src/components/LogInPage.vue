@@ -116,7 +116,6 @@ export default {
         email: this.state.email,
         password: this.state.password
       };
-      console.log(postData);
       try {
         const res = await fetch(`${baseURL}/login`, {
           method: "POST", // *GET, POST, PUT, DELETE, etc.

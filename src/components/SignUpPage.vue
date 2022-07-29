@@ -222,6 +222,8 @@ import {
   helpers
 } from "@vuelidate/validators";
 
+const baseURL = "http://localhost:1234";
+
 export default {
   name: "SignUpPage",
   setup() {
@@ -326,14 +328,53 @@ export default {
         this.step--;
       }
     },
-
-    submitForm() {
+    postRegData() {
+      //some code
+    },
+    async submitForm() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        this.$toast.success(`Your account succesfull crated! Please login now`);
-        this.$router.push("/");
-        setTimeout(this.$toast.clear, 3000);
+        try {
+          const response = await fetch(`${baseURL}/register`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": "token-value"
+            },
+            body: JSON.stringify(this.v$.formReg.$model)
+          }).then((response) => {
+            if (response.status >= 400 && response.status < 600) {
+              throw new Error("Bad response from server");
+            }
+            return response;
+          });
 
+          if (!response.ok) {
+            console.log(response);
+            const message = `An error has occured: ${response.status} - ${response.statusText}`;
+            throw new Error(message);
+          }
+
+          const data = await response.json();
+          const result = {
+            status: response.status + "-" + response.statusText,
+            headers: {
+              "Content-Type": response.headers.get("Content-type"),
+              "Content-Length": response.headers.get("Content-Length")
+            },
+            data: data
+          };
+
+          console.log(result);
+
+          await this.$toast.success(
+            `Your account succesfull crated! Please login now`
+          );
+          await this.$router.push("/");
+          setTimeout(this.$toast.clear, 3000);
+        } catch (err) {
+          console.log(err.message);
+        }
         console.log(this.v$.formReg.$model);
       } else {
         this.$toast.error(`Form failed validation`);
