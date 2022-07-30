@@ -39,15 +39,15 @@
             <div v-show="step === 1" class="step">
               <v-text-field
                 class="animate__animated animate__fadeInLeft"
-                v-model="state.formReg.name"
+                v-model="state.formReg.username"
                 hide-details
-                label="Name"
-                @blur="v$.formReg.name.$touch"
+                label="Username"
+                @blur="v$.formReg.username.$touch"
                 type="text"
               >
               </v-text-field>
-              <div class="v-messages" v-if="v$.formReg.name.$error">
-                {{ v$.formReg.name.$errors[0].$message }}
+              <div class="v-messages" v-if="v$.formReg.username.$error">
+                {{ v$.formReg.username.$errors[0].$message }}
               </div>
               <v-text-field
                 class="animate__animated animate__fadeInRight"
@@ -230,7 +230,7 @@ export default {
     const state = reactive({
       formReg: {
         email: "",
-        name: "",
+        username: "",
         password: {
           password: "",
           confirm: ""
@@ -248,7 +248,7 @@ export default {
             required,
             email
           },
-          name: {
+          username: {
             required,
             alpha,
             minLength: minLength(2)
@@ -300,7 +300,7 @@ export default {
   computed: {
     isDisabledNext() {
       return (
-        this.v$.formReg.name.$invalid ||
+        this.v$.formReg.username.$invalid ||
         this.v$.formReg.password.password.$invalid ||
         this.v$.formReg.password.confirm.$invalid
       );
@@ -334,6 +334,15 @@ export default {
     async submitForm() {
       this.v$.$validate();
       if (!this.v$.$error) {
+        const regData = {
+          username: this.state.formReg.username,
+          password: this.state.formReg.password.password,
+          email: this.state.formReg.email,
+          country: this.state.formReg.country,
+          city: this.state.formReg.city,
+          age: this.state.formReg.age,
+          sex: this.state.formReg.sex
+        };
         try {
           const response = await fetch(`${baseURL}/register`, {
             method: "POST",
@@ -341,12 +350,7 @@ export default {
               "Content-Type": "application/json",
               "x-access-token": "token-value"
             },
-            body: JSON.stringify(this.v$.formReg.$model)
-          }).then((response) => {
-            if (response.status >= 400 && response.status < 600) {
-              throw new Error("Bad response from server");
-            }
-            return response;
+            body: JSON.stringify(regData)
           });
 
           if (!response.ok) {
@@ -375,7 +379,7 @@ export default {
         } catch (err) {
           console.log(err.message);
         }
-        console.log(this.v$.formReg.$model);
+        console.log(regData);
       } else {
         this.$toast.error(`Form failed validation`);
       }
