@@ -55,7 +55,7 @@
               </div>
             </div>
             <v-img
-              src="../assets/img/phone.png"
+              src="../assets/img/pexels-math-249324.jpg"
               alt="Mobile Responsive"
             ></v-img>
           </div>
