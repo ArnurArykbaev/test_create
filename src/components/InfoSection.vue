@@ -21,10 +21,11 @@
         </div>
       </v-row>
       <v-row class="ma-0">
-        <v-col cols="6" class="bg-yellow-accent-4">
+        <v-col cols="12" sm="6" class="bg-yellow-accent-4">
           <div class="left-block d-flex justify-center flex-column">
             <v-img
               src="../assets/img/test_time_2.jpg"
+              class="description-image"
               alt="Tests with Features"
             ></v-img>
             <div class="d-flex flex-column align-center mt-10 mb-5">
@@ -41,7 +42,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="6" class="bg-grey-lighten-3">
+        <v-col cols="12" sm="6" class="bg-grey-lighten-3">
           <div class="right-block d-flex justify-center flex-column">
             <div class="d-flex flex-column align-center mt-10 mb-5">
               <p :class="`text-${fz}`" class="mb-5 font-weight-regular">
@@ -56,6 +57,7 @@
             </div>
             <v-img
               src="../assets/img/pexels-math-249324.jpg"
+              class="description-image"
               alt="Mobile Responsive"
             ></v-img>
           </div>
@@ -119,6 +121,9 @@ export default {
   }
   .space[data-v-37480988] {
     width: 0.5rem;
+  }
+  .description-image {
+    display: none;
   }
 }
 </style>

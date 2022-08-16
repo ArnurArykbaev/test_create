@@ -448,4 +448,15 @@ export default {
 .v-slider-track {
   --v-slider-track-size: 2px !important;
 }
+
+@media (max-width: 640px) {
+  .signup-block {
+    min-width: 400px;
+  }
+}
+@media (max-width: 440px) {
+  .signup-block {
+    min-width: 300px;
+  }
+}
 </style>
