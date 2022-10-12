@@ -35,6 +35,7 @@
       dark
       color="#212121"
       class="button button-header justify-center animate__animated animate__fadeInUp"
+      to="/login"
       >Start
     </v-btn>
   </div>
