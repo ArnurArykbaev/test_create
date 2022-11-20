@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     onScroll() {
-      if (window.scrollY < 70) {
+      if (window.scrollY < 15) {
         this.bgColor = "transparent";
       } else {
         this.bgColor = "yellow-accent-4";
