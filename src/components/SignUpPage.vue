@@ -18,7 +18,7 @@
           class="signup-header transition-swing text-h2 font-weight-light mb--1 ml-2 mt-2 mb-5"
           color="#212121"
         >
-          Crate tests online
+          Create tests online
         </div>
       </v-row>
       <v-row class="ma-2">
